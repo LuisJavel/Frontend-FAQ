@@ -1,0 +1,30 @@
+---
+import { getCollection } from "astro:content";
+import Accordion from "../component/Accordion.astro";
+
+const items = await getCollection("faqs")
+
+import "../styles/main.css"
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+	</head>
+	<main>
+		<body>
+			<h1>Astro Accordio</h1>
+			<Accordion accordionItems={items.map((i) => i.data)}
+			title="FAQs"
+			isFirstExpanded={true}
+			isOnlyOneExpandable={true}
+			/>
+			<Accordion accordionItems={items.slice(1).map((i) => i.data)}
+			title="Unique Title" />
+		</body>
+	</main>
+</html>
